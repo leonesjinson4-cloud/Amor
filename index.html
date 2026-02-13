@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Anahi ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffe6e6;
+            background-image: radial-gradient(#ffccd5 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Nunito', sans-serif; /* Fuente general muy legible */
+            flex-direction: column;
+            overflow: hidden;
+            text-align: center;
+            margin: 0;
+            touch-action: manipulation;
+            /* Sombra suave general para todo el texto del cuerpo */
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        h1 {
+            color: #d32f2f;
+            /* CAMBIO: Usamos Nunito Extra Bold en lugar de cursiva para que se entienda bien */
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900; 
+            font-size: 2.2rem;
+            margin: 15px 20px;
+            z-index: 10;
+            /* CAMBIO: Sombra sólida blanca para que resalte mucho */
+            text-shadow: 3px 3px 0px #ffffff, 4px 4px 5px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+
+        .gif-container {
+            /* Asegura que el contenedor esté centrado */
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .gif-container img {
+            width: 85%;
+            max-width: 300px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.3);
+            /* CAMBIO: Eliminado el margin-bottom: 10px; que había antes */
+            margin: 0; 
+            border: 5px solid white;
+            display: block; /* Ayuda a quitar espacios extra debajo de las imágenes */
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px; /* Un poco más de espacio arriba de los botones */
+            width: 100%;
+            height: 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 800;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            font-family: 'Nunito', sans-serif;
+            /* Sombra al texto de los botones */
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        #yesBtn {
+            background-color: #ff4081;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        #noBtn {
+            background-color: white;
+            color: #ff4081;
+            border: 3px solid #ff4081;
+            position: absolute; 
+            transition: top 0.3s ease, left 0.3s ease;
+        }
+
+        /* Pantalla de éxito */
+        #success-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffe6e6;
+            z-index: 20;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            background-image: radial-gradient(#ffccd5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        #success-screen h2 {
+            color: #d32f2f;
+            /* CAMBIO: Fuente legible y negrita */
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            /* CAMBIO: Sombra fuerte */
+            text-shadow: 3px 3px 0px #ffffff, 4px 4px 5px rgba(0,0,0,0.2);
+        }
+
+        #success-screen p {
+            font-size: 1.4rem;
+            font-weight: 700; /* Texto más gordito */
+            color: #d32f2f; /* Color rojo más intenso para que se lea mejor */
+            max-width: 320px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            /* Sombra blanca para definir el texto */
+            text-shadow: 2px 2px 0px #ffffff;
+        }
+
+        /* Botón de WhatsApp */
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+            animation: bounce 2s infinite;
+            border: 3px solid white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 64, 129, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 64, 129, 0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-screen">
+        <div class="gif-container">
+            <img src="https://media1.tenor.com/m/eKomFTTw7a0AAAAd/rose-cute.gif" alt="Ositos Amor Beso">
+        </div>
+
+        <h1>Hola aguacatita<br>¿Quieres ser mi San Valentín? 🌹</h1>
+
+        <div class="buttons">
+            <button id="yesBtn" onclick="finishProposal()">¡Sí, acepto!</button>
+            <button id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()">No</button>
+        </div>
+    </div>
+
+    <div id="success-screen">
+        <img src="https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif" alt="Besos" style="width:250px">
+        
+        <h2>¡Sabía que dirías que sí! ❤️</h2>
+        
+        <p>Te dedico esta canción 🌹.<br>Te amo demasiado ❤️</p>
+        
+        <a id="waLink" class="whatsapp-btn" href="#" target="_blank">
+            Confirmar por WhatsApp 💌
+        </a>
+    </div>
+
+    <script>
+        // *** CONFIGURACIÓN ***
+        const tuNumero = "593959599213"; 
+        const mensajeWhatsApp = "¡Hola amor! ( ˘ ³˘) SÍ quiero ser tu San Valentín. Nos vemos mañana a las 8:15 am ( ˘͈ ᵕ ˘͈♡)";
+
+        // *** LÓGICA DEL BOTÓN NO ***
+        function moveButton(e) {
+            if(e) e.preventDefault(); // Evita comportamientos extraños en móviles
+            const noBtn = document.getElementById('noBtn');
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            
+            // Calculamos límites más seguros para que no se salga de la pantalla
+            const maxX = window.innerWidth - btnWidth - 40;
+            const maxY = window.innerHeight - btnHeight - 40;
+
+            // Aseguramos que las coordenadas sean positivas
+            const x = Math.max(20, Math.random() * maxX);
+            const y = Math.max(20, Math.random() * maxY); 
+            
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        // *** LÓGICA DEL BOTÓN SÍ ***
+        function finishProposal() {
+            document.getElementById('main-screen').style.display = 'none';
+            document.getElementById('success-screen').style.display = 'flex';
+            
+            // Generar el link de WhatsApp
+            const link = `https://wa.me/${tuNumero}?text=${encodeURIComponent(mensajeWhatsApp)}`;
+            document.getElementById('waLink').href = link;
+
+            // *** AUDIO ***
+            // Asegúrate de que este archivo exista en tu carpeta con este nombre exacto
+            const cancionUrl = "Andrey_Serrano_Febrero_Mejor_y_es_que_a_tu_lado_todo_es_mucho.mp3"; 
+            
+            const audio = new Audio(cancionUrl);
+            audio.loop = true; 
+            // Intentamos reproducir. Algunos navegadores bloquean si no hay interacción previa.
+            audio.play().catch(e => console.log("El navegador bloqueó el audio automático, es normal: ", e));
+
+            // Lluvia de corazones
+            createHearts();
+        }
+
+        function createHearts() {
+            const container = document.getElementById('success-screen');
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.innerHTML = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = '-50px';
+                heart.style.fontSize = Math.random() * 35 + 15 + 'px';
+                heart.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`; 
+                heart.style.zIndex = '100';
+                heart.style.textShadow = '2px 2px 4px rgba(0,0,0,0.3)'; // Sombra a los corazones también
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }, 150); 
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fall { to { transform: translateY(120vh) rotate(360deg); opacity: 0; } }`;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
